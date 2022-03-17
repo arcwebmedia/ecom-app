@@ -14,6 +14,10 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
+
+import { getProduct } from "../scr/redux/actions/productAction"
+import { connect } from 'react-redux';
+
 var DATA = [
   { img: require('../assets/pic1.png'), name: 'Sweatshirt' },
   { img: require('../assets/pic1.png'), name: 'Jacket' },
@@ -23,8 +27,30 @@ var DATA = [
   { img: require('../assets/pic1.png'), name: 'Jacket' },
   { img: require('../assets/pic1.png'), name: 'Fashion' },
 ]
+class Men extends Component {
 
-export default class Men extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      categoryProduct: []
+    };
+  }
+
+  componentDidMount() {
+    this.fetchByCategory("Shirts", "T-Shirts", "Jeans")
+  }
+
+  async fetchByCategory(category) {
+    await fetch(`http://192.168.1.3:4001/api/v1/products?category=${category}`, {
+      method: "GET",
+
+    }).then(res => res.json())
+      .then(data => {
+        console.log(data.products)
+        this.setState({ categoryProduct: data.products })
+      }
+      ).catch(e => console.log(e))
+  }
   render() {
     return (
       <SafeAreaView style={{ flex: 1 }} >
@@ -44,7 +70,7 @@ export default class Men extends Component {
             <Image style={{ height: 20, width: 20 }} source={require('../assets/heart.png')} />
           </TouchableOpacity>
 
-          <TouchableOpacity >
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('Cart')}>
             <Image style={{ height: 25, width: 25 }} source={require('../assets/cart.png')} />
           </TouchableOpacity>
         </View>
@@ -103,7 +129,8 @@ export default class Men extends Component {
 
             <TouchableOpacity onPress={() => this.props.navigation.navigate('jeans')} >
               <View style={{ justifyContent: 'center', alignItems: 'center', }}>
-                <Image style={{ height: 120, width: 100, borderWidth: 1, borderColor: 'black', borderRadius: 10 }} source={require('../assets/jeans.jpg')} />
+                <Image style={{ height: 120, width: 100, borderWidth: 1, borderColor: 'black', borderRadius: 10 }}
+                  source={require('../assets/jeans.jpg')} />
                 <Text style={{ color: 'black', fontSize: 13, marginTop: 10 }}>JEANS</Text>
               </View>
             </TouchableOpacity>
@@ -117,3 +144,18 @@ export default class Men extends Component {
   }
 }
 
+const mapsStateToProps = (state) => {
+  console.log(state.product)
+  return {
+    product: state.product.products
+  }
+}
+
+
+const mapsDispatchToProps = (dispatch) => {
+  return {
+    getProducts: () => dispatch(getProduct())
+  }
+
+}
+export default connect(mapsStateToProps, mapsDispatchToProps)(Men)

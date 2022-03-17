@@ -38,31 +38,31 @@ class App extends Component {
       formData.append("password", this.state.password)
       formData.append("name", "nonny")
       console.log(this.state.email)
-     
+
 
       // this.props.registerUser(formData);
-       await fetch("http://192.168.1.5:4001/api/v1/register",{
-         method:"post",
-         body:formData,
-         headers:{
-           "Content-Type":"multipart/form-data"
-         }
-       }).then((respon) => respon.json())
-       .then ((respJson) => {
-           this.setState({user:respJson})
-       })
-       .catch((error) => console.error(error));
-   
+      //  await fetch("http://192.168.1.5:4001/api/v1/register",{
+      //    method:"post",
+      //    body:formData,
+      //    headers:{
+      //      "Content-Type":"multipart/form-data"
+      //    }
+      //  }).then((respon) => respon.json())
+      //  .then ((respJson) => {
+      //      this.setState({user:respJson})
+      //  })
+      //  .catch((error) => console.error(error));
 
-      console.log(this.props.user.isAuthenticated)
-      
+
+      // console.log(this.props.user.isAuthenticated)
+
       this.props.navigation.navigate('HomeScreen')
     }
   }
   render() {
     return (
       <SafeAreaView style={{ flex: 1 }} >
-        <StatusBar backgroundColor='#e06024' />
+        <StatusBar backgroundColor='#e06024'/>
         <ImageBackground style={{ flex: 1, opacity: 0.4 }}
           imageStyle={{ borderRadius: 30 }}
           source={require('./assets/Image.png')}></ImageBackground>
@@ -73,8 +73,7 @@ class App extends Component {
         }}>
           <View style={{ flexDirection: 'row', width: '35%', justifyContent: 'space-between', alignItems: 'center', }}>
             <View style={{ height: 40, width: 40, borderRadius: 25, backgroundColor: '#e06024' }}></View>
-            <View style={{ height: 100, width: 100, borderRadius: 50, backgroundColor: '#11354a', position: 'absolute', right: -30, }}></View>
-
+            <View style={{ height: 100, width: 100, borderRadius: 50, backgroundColor: '#11354a', position:'absolute', right: -30, }}></View>
           </View>
         </View>
 

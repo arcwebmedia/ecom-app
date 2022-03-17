@@ -16,21 +16,13 @@ import {
     Modal,
     Share
 } from 'react-native';
-const shareOptions = {
-    title: 'Title',
-    message: 'Message to share',
-    url: 'www.example.com',
-    subject: 'Subject'
-};
-
-
 
 import { addToCart } from "./scr/redux/actions/CartAction"
 
 import { connect } from 'react-redux';
 
 class notification extends Component {
-    onSharePress = () => Share.share(shareOptions);
+ 
     constructor() {
         super();
         this.state = {
@@ -65,7 +57,7 @@ class notification extends Component {
                     </View>
                     <View style={{ borderBottomWidth: 0.5, borderColor: 'gray' }}></View>
 
-                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 10, width: '70%' }}>
+                    <View style={{ flexDirection: 'row', padding: 10, width: '70%' }}>
                         <TouchableOpacity style={{
                             height: 30, width: 50, borderRadius: 10, justifyContent: 'center', borderColor: this.state.borderColor == 1 ? '#e06024' : 'black',
                             alignItems: 'center', borderWidth: 1, backgroundColor: this.state.clicked == 1 ? '#f7af8d' : 'white'
@@ -76,19 +68,13 @@ class notification extends Component {
 
                         <TouchableOpacity style={{
                             height: 30, width: 60, borderRadius: 10, justifyContent: 'center', borderColor: this.state.borderColor == 2 ? '#e06024' : 'black',
-                            alignItems: 'center', borderWidth: 1, backgroundColor: this.state.clicked == 2 ? '#f7af8d' : 'white'
+                            alignItems: 'center', borderWidth: 1,marginLeft:10, backgroundColor: this.state.clicked == 2 ? '#f7af8d' : 'white'
                         }}
                             onPress={() => this.changeColor(2)}>
                             <Text style={{ color: 'black' }}>Activity</Text>
                         </TouchableOpacity>
 
-                        <TouchableOpacity style={{
-                            height: 30, width: 80, borderRadius: 10, justifyContent: 'center', borderColor: this.state.borderColor == 3 ? '#e06024' : 'black',
-                            alignItems: 'center', borderWidth: 1, backgroundColor: this.state.clicked == 3 ? '#f7af8d' : 'white'
-                        }}
-                            onPress={() => this.changeColor(3)}>
-                            <Text style={{ color: 'black' }}>Promotion</Text>
-                        </TouchableOpacity>
+                     
 
                     </View>
                     {this.state.screenList == '1' ?
@@ -99,20 +85,15 @@ class notification extends Component {
                                 <Text style={{ color: 'gray', fontSize: 15, }}>We will notify you when somthing arrives </Text>
                             </View>
                         </View>
-                        : this.state.screenList = '2' ?
+                        :
                             <View style={{ marginTop: 10, width: '100%', height: 350, elevation: 5, backgroundColor: 'white' }} >
                                 <Text style={{ color: 'black', fontWeight: 'bold', fontSize: 17, padding: 10 }}>Activity</Text>
                                 <View style={{ justifyContent: 'center', alignItems: 'center', position: 'absolute', bottom: 20, alignSelf: 'center' }} >
                                     <Text style={{ color: 'black', fontWeight: 'bold', fontSize: 17, }}>No new notification</Text>
                                     <Text style={{ color: 'gray', fontSize: 15, }}>We will notify you when somthing arrives </Text>
                                 </View>
-                            </View> :  <View style={{ marginTop: 10, width: '100%', height: 350, elevation: 5, backgroundColor: 'white' }} >
-                                <Text style={{ color: 'black', fontWeight: 'bold', fontSize: 17, padding: 10 }}>Promotion</Text>
-                                <View style={{ justifyContent: 'center', alignItems: 'center', position: 'absolute', bottom: 20, alignSelf: 'center' }} >
-                                    <Text style={{ color: 'black', fontWeight: 'bold', fontSize: 17, }}>No new notification </Text>
-                                    <Text style={{ color: 'gray', fontSize: 15, }}>We will notify you when somthing arrives </Text>
-                                </View>
-                            </View> }
+                            </View> 
+                         }
 
 
 
